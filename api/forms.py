@@ -60,15 +60,10 @@ class CervicalForm(serializers.ModelSerializer):
         model = models.CervicalModel
         fields = ('id', 'developer_profile', "age", "no_of_sexual_parteners", "age_of_first_intercourse", "no_of_pregnancies", "smokes", "smokes_packs", "hormonal_contraceptives", "intra_uterine", "STDS", "any_std", "condylomatosis", "cervical_condylomatosis", "vaginal", "vulvo_perineal", "syphilis", "pelvic", "genital", "molluscum", "AIDS", "HIV", "hepatitis", "HPV", "diagnosis_std", "cancer", "neoplasis", "diagnosis_hpv", "timing","report")
         read_only_fields = ('developer_profile','report')
-# class ImageReportForm(serializers.ModelSerializer):
-#     class Meta:
-#         model = models.ImageReportModel
-#         fields = ('id', 'developer_profile', 'url', 'parsed_image', 'timing','report')
-#         read_only_fields = ('developer_profile','report', 'url')
 
-# class VideoReportForm(serializers.ModelSerializer):
-#     class Meta:
-#         model = models.VideoReportModel
-#         fields = ('id', 'developer_profile', 'url', 'parsed_video', 'timing','report')
-#         read_only_fields = ('developer_profile','report', 'url')
+class BreastCancerForm(serializers.ModelSerializer):
+    class Meta:
+        model = models.BreastCancerModel
+        fields = ('id', 'developer_profile', 'url', 'parsed_image', 'timing','report')
+        read_only_fields = ('developer_profile','report', 'url')
      
