@@ -120,8 +120,3 @@ class BreastCancerModel(models.Model):
     def __str__(self):
         return self.timing
 
-class BreastCancerForm(serializers.ModelSerializer):
-    class Meta:
-        model = models.BreastCancerModel
-        fields = ('id', 'developer_profile', 'url', 'parsed_image', 'timing','report')
-        read_only_fields = ('developer_profile','report', 'url')
