@@ -13,7 +13,7 @@ from threading import Thread
 from rest_framework.authtoken.models import Token
 #from image_classification.predict_image import classify_image
 from Pcos.pcos_predict import predict_PCOS
-
+from Cervical_Cancer.predict_cervical import predict_cervical
 class StartThread(Thread):
     def __init__(self, group = None, target = None, name = None, args = (), kwargs = {}, Verbose = None):
         Thread.__init__(self, group, target, name, args, kwargs)
@@ -141,78 +141,62 @@ class PCOSViewSet(viewsets.ModelViewSet):
         new_response = t.join()
         return new_response
         
-# class ImageReportViewSet(viewsets.ModelViewSet):
-#     serializer_class = forms.ImageReportForm
-#     queryset = models.ImageReportModel.objects.all()
-#     authentication_classes = (TokenAuthentication,)
-#     permission_classes = (permissions.UpdateOwnReport, IsAuthenticatedOrReadOnly,)
-#     filter_backends = (filters.SearchFilter,)
-#     search_backends = ('timing', 'developer_profile',)
+class CervicalViewSet(viewsets.ModelViewSet):
+    serializer_class = forms.CervicalForm
+    queryset = models.CervicalModel.objects.all()
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (permissions.UpdateOwnReport, IsAuthenticatedOrReadOnly,)
+    filter_backends = (filters.SearchFilter,)
+    search_backends = ('timing', 'developer_profile', "age", "no_of_sexual_parteners", "age_of_first_intercourse", "no_of_pregnancies", "smokes", "smokes_packs", "hormonal_contraceptives", "intra_uterine", "STDS", "any_std", "condylomatosis", "cervical_condylomatosis", "vaginal", "vulvo_perineal", "syphilis", "pelvic", "genital", "molluscum", "AIDS", "HIV", "hepatitis", "HPV", "diagnosis_std", "cancer", "neoplasis", "diagnosis_hpv")
 
-#     def perform_create(self, form, report = None):
-#         form.save(developer_profile = self.request.user, report = report)
-    
-#     def make_create(self, request):
-#         form = self.serializer_class(data = request.data)
-#         if form.is_valid():
-#             #print(data)
-#             report = {}
-#             # t2 = StartThread(target = self.perform_create, args = (form, report,))
-#             # t2.setDaemon(True)
-#             # t2.start()
-#             self.perform_create(form, report)
-#             data = data = form.validated_data['parsed_image']
-#             #t1 = StartThread(target = classify_image, args = (data,))
-#             #t1.setDaemon(True)
-#             #t1.start()
-#             report = classify_image(data)
-#             t2 = StartThread(target = self.perform_create, args = (form, report,))
-#             t2.setDaemon(True)
-#             t2.start()
-#             return Response({'report': report})
-#         else:
-#             return Response(
-#                 form.errors,
-#                 status = status.HTTP_400_BAD_REQUEST,
-#             )
-#     def create(self, request):
-#         t = StartThread(target = self.make_create, args = (request,))
-#         t.setDaemon(True)
-#         t.start()
-#         new_response = t.join()
-#         return new_response
+    def perform_create(self, form, report = None):
+        form.save(developer_profile = self.request.user, report = report)
 
-# class VideoReportViewSet(viewsets.ModelViewSet):
-#     serializer_class = forms.VideoReportForm
-#     queryset = models.VideoReportModel.objects.all()
-#     authentication_classes = (TokenAuthentication,)
-#     permission_classes = (permissions.UpdateOwnReport, IsAuthenticatedOrReadOnly,)
-#     filter_backends = (filters.SearchFilter,)
-#     search_backends = ('timing', 'developer_profile',)
-
-#     def perform_create(self, form, report = None):
-#         form.save(developer_profile = self.request.user, report = report)
-    
-#     def make_create(self, request):
-#         form = self.serializer_class(data = request.data)
-#         if form.is_valid():
-#             data = form.validated_data['parsed_video']
-#             t1 = StartThread(target = predict, args = (data,))
-#             t1.setDaemon(True)
-#             t1.start()
-#             report = t1.join()
-#             t2 = StartThread(target = self.perform_create, args = (form, report,))
-#             t2.setDaemon(True)
-#             t2.start()
-#             return Response({'report': report})
-#         else:
-#             return Response(
-#                 form.errors,
-#                 status = status.HTTP_400_BAD_REQUEST,
-#             )
-#     def create(self, request):
-#         t = StartThread(target = self.make_create, args = (request,))
-#         t.setDaemon(True)
-#         t.start()
-#         new_response = t.join()
-#         return new_response
+    def make_create(self, request):
+        form = self.serializer_class(data = request.data)
+        if form.is_valid():
+            age = form.validated_data["age"]
+            no_of_sexual_parteners = form.validated_data["no_of_sexual_parteners"]
+            age_of_first_intercourse = form.validated_data["age_of_first_intercourse"]
+            no_of_pregnancies = form.validated_data["no_of_pregnancies"]
+            smokes = form.validated_data["smokes"]
+            smokes_packs = form.validated_data["smokes_packs"]
+            hormonal_contraceptives = form.validated_data["hormonal_contraceptives"]
+            intra_uterine = form.validated_data["intra_uterine"]
+            STDS = form.validated_data["STDS"]
+            any_std = form.validated_data["any_std"]
+            condylomatosis = form.validated_data["condylomatosis"]
+            cervical_condylomatosis = form.validated_data["cervical_condylomatosis"]
+            vaginal = form.validated_data["vaginal"]
+            vulvo_perineal = form.validated_data["vulvo_perineal"]
+            syphilis = form.validated_data["syphilis"]
+            pelvic = form.validated_data["pelvic"]
+            genital = form.validated_data["genital"]
+            molluscum = form.validated_data["molluscum"]
+            AIDS = form.validated_data["AIDS"]
+            HIV = form.validated_data["HIV"]
+            hepatitis = form.validated_data["hepatitis"]
+            HPV = form.validated_data["HPV"]
+            diagnosis_std = form.validated_data["diagnosis_std"]
+            cancer = form.validated_data["cancer"]
+            neoplasis = form.validated_data["neoplasis"]
+            diagnosis_hpv = form.validated_data["diagnosis_hpv"]
+            #t1 = StartThread(target = predict, args = (data,))
+            #t1.setDaemon(True)
+            #t1.start()
+            report = predict_cervical(age, no_of_sexual_parteners, age_of_first_intercourse, no_of_pregnancies, smokes, smokes_packs, hormonal_contraceptives, intra_uterine, STDS, any_std, condylomatosis, cervical_condylomatosis, vaginal, vulvo_perineal, syphilis, pelvic, genital, molluscum, AIDS, HIV, hepatitis, HPV, diagnosis_std, cancer, neoplasis, diagnosis_hpv)
+            t2 = StartThread(target = self.perform_create, args = (form, report,))
+            t2.setDaemon(True)
+            t2.start()
+            return Response({'report': report})
+        else:
+            return Response(
+                form.errors,
+                status = status.HTTP_400_BAD_REQUEST,
+            )
+    def create(self, request):
+        t = StartThread(target = self.make_create, args = (request,))
+        t.setDaemon(True)
+        t.start()
+        new_response = t.join()
+        return new_response

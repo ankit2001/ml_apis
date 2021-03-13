@@ -54,12 +54,12 @@ class PCOSForm(serializers.ModelSerializer):
         model = models.PCOSModel
         fields = ('id', 'developer_profile', "age", "Chin", "Cheeks", "Lips", "Breast", "Arms", "Thigh", "Exercise", "Eat", "PCOS", "BMI", "Weight", "Period", "Concieve", "Skin", "Hairthin", "Patch", "Tired", "Mood", "Can", "City", "timing","report")
         read_only_fields = ('developer_profile','report')
-        """ extra_kwargs = {
-            'report': {
-                JSONField({}): True,
-            }
-        }
-        """
+        
+class CervicalForm(serializers.ModelSerializer):
+    class Meta:
+        model = models.CervicalModel
+        fields = ('id', 'developer_profile', "age", "no_of_sexual_parteners", "age_of_first_intercourse", "no_of_pregnancies", "smokes", "smokes_packs", "hormonal_contraceptives", "intra_uterine", "STDS", "any_std", "condylomatosis", "cervical_condylomatosis", "vaginal", "vulvo_perineal", "syphilis", "pelvic", "genital", "molluscum", "AIDS", "HIV", "hepatitis", "HPV", "diagnosis_std", "cancer", "neoplasis", "diagnosis_hpv", "timing","report")
+        read_only_fields = ('developer_profile','report')
 # class ImageReportForm(serializers.ModelSerializer):
 #     class Meta:
 #         model = models.ImageReportModel

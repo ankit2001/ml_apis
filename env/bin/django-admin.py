@@ -1,4 +1,4 @@
-#!/Users/ankitchoudhary/Downloads/Hackathon/app/env/bin/python3
+#!/Users/ankitchoudhary/Downloads/Hackathon/ml_apis/env/bin/python3
 from django.core import management
 
 if __name__ == "__main__":
