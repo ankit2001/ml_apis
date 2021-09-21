@@ -108,15 +108,3 @@ class CervicalModel(models.Model):
     def __str__(self):
         return self.timing
 
-class BreastCancerModel(models.Model):
-    objects = DeveloperManager()
-    developer_profile = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete = models.CASCADE,
-    )
-    timing = models.DateTimeField(auto_now_add = True)
-    parsed_image = models.ImageField(upload_to = 'images/')
-    report = JSONField({})
-    def __str__(self):
-        return self.timing
-

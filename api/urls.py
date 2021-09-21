@@ -6,7 +6,6 @@ router = routers.DefaultRouter()
 router.register('developer-profile', views.DeveloperProfileViewSet)
 router.register('pcos', views.PCOSViewSet)
 router.register('cervical', views.CervicalViewSet)
-router.register('breast_cancer', views.BreastCancerViewSet)
 urlpatterns = [
     path("", include(router.urls)),
     path('developer-accessToken/', views.DeveloperLoginApiView.as_view()),

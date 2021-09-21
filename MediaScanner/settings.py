@@ -25,7 +25,7 @@ SECRET_KEY = '*_0qv_c7xem^%vhv*^c0rl1x58kdu-d2+yox0z-z10@(yf%a^@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["ec2-3-134-252-133.us-east-2.compute.amazonaws.com", '127.0.0.1']
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -40,10 +40,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'jsonfield',
+    "corsheaders",
     'api'
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
